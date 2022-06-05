@@ -5,37 +5,75 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
-    <link rel="src" href="index.js">
-    <title>To-Do List</title>
+    <title>Taschenrechner</title>
+
+    <script>
+        function appendOperation(operation) {
+            document.getElementById("resultArea").innerHTML += operation;
+        }
+
+        function calculateResult() {
+            let container = document.getElementById("resultArea");
+            let result = eval(container.innerHTML);
+            container.innerHTML = result;
+        }
+
+        function deleteLast() {
+            let container = document.getElementById("resultArea");
+            if(container.innerHTML.endsWith(' ')) {
+                container.innerHTML = container.innerHTML.slice(0, -3);
+            } else {
+                container.innerHTML = container.innerHTML.slice(0, -1);
+            }
+            
+        }
+
+        function deleteAll() {
+            let container = document.getElementById("resultArea");
+            container.innerHTML = container.innerHTML.slice(0, 0);
+        }
+    </script>
+
 </head>
 
+
+
 <body>
-    <header>
-        <h1>To-Do-List 2022</h1>
-        <form id="task-form">
-            <input type="text" placeholder="What do you have to do?">
-            <input type="submit" value="Add Task">
-            </form>
-        </form>
-    </header>
 
-    <main>
-        <section>
-            <h2>Tasks</h2>
-            
-            <div id="tasks">
-                <div class="task">
-                    <div class="content">
-                        <input type="text" value="taaask" class="text" readonly>
-                    </div>
-                    <div class="actions">
-                        <button class="edit">Edit</button>
-                        <button class="delete">Delete</button>
-                    </div>  
-                </div>
-            </div>
+    <div id="resultArea">
+        
+    </div>
 
-        </section>
-    </main>
+    <table>
+        <tr>
+            <td onclick="appendOperation(7)">7</td>
+            <td onclick="appendOperation(8)">8</td>
+            <td onclick="appendOperation(9)">9</td>
+            <td onclick="deleteLast()">DEL</td>
+            <td onclick="deleteAll()">AC</td>
+        </tr>
+        <tr>
+            <td onclick="appendOperation(4)">4</td>
+            <td onclick="appendOperation(5)">5</td>
+            <td onclick="appendOperation(6)">6</td>
+            <td onclick="appendOperation(' * ')">×</td>
+            <td onclick="appendOperation(' / ')">÷</td>
+        </tr>
+        <tr>
+            <td onclick="appendOperation(1)">1</td>
+            <td onclick="appendOperation(2)">2</td>
+            <td onclick="appendOperation(3)">3</td>
+            <td onclick="appendOperation(' + ')">+</td>
+            <td onclick="appendOperation(' - ')">-</td>
+        </tr>
+        <tr>
+            <td onclick="appendOperation(0)">0</td>
+            <td onclick="appendOperation('.')">.</td>
+            <td onclick="appendOperation('&#40;')">(</td>
+            <td onclick="appendOperation('&#41;')">)</td>
+            <td onClick="calculateResult()" id="result">=</td>
+        </tr>
+    </table>
+
 </body>
 </html>
